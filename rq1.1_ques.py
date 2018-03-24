@@ -10,55 +10,12 @@
 
 import pandas as pd
 import numpy as np
+from rq1_1common import _designations, _designation_map
 
 question_file_path = './DSEOutputCSV/QuestionPostsOnly.csv'
 rq_1_1_ques_save_path =  './ProcessedCSV/rq1.1questions_raw.csv'
 
-
-_designations = [
-        'Professional',
-        'Academia-Professional',
-        'Academia-Ambiguous',
-        'Academia-Pedagogical',
-        'Academia-Student',
-        'Online-User-Profile-Present'
-        ]
-
-
-_designation_map = {
-        'Academia-Student' : {
-                'student', 'freshman','sophomore', 'graduate student',
-                'grad student', 'undergraduate student', 'undergrad',
-                'bachelor', 'phd', 'post graduate', 'postgraduate',
-                'academic', 'college senior', 'teaching assistant',
-                'data science', 'computer science', 'intern',
-                'computer science engineering', 'computer engineering',
-                'cs engineering', 'research'},
-        'Academia-Pedagogical' : {
-                'professor', 'lecturer', 'teacher', 'teach'
-                },
-        'Academia-Ambiguous' : {
-                'researcher', 'computer scientist', 'mathematician',
-                'bioinformatician', 'statistician', 'physicist',
-                'neuroscientist', 'biologist', 'scientist'
-                },
-        'Academia-Professional' : {
-                'research engineer', 'data scientist', 'research scientist',
-                'machine learning engineer'
-                },
-        'Professional' : {
-                'developer', 'engineer', 'designer', 'analyst', 'contractor',
-                'software engineer', 'software developer', 'data engineer',
-                'graphic designer', 'cs engineer', 'computer engineer',
-                'consultant', 'architect', 'manager', 'development',
-                'professional', 'founder', 'leader', 'team lead', 'tech lead',
-                'technical leader', 'work on'
-                },
-        'Online-User-Profile-Present' : {
-                'http', 'www'
-                }
-        }
-
+###############################################################################
 
 df = pd.read_csv(question_file_path)
 len_df = len(df)
@@ -86,7 +43,7 @@ for idx in range(len_df):
 
 ###############################################################################
 
-cols_to_del = ['AboutMe', 'ParentId', 'DeletionDate']
+cols_to_del = ['ParentId', 'DeletionDate']
 df = df.drop(cols_to_del, axis = 1)
 
 ################ SMOOTHED WEIGHTED UPVOTE DOWNVOTE RATIO ######################
