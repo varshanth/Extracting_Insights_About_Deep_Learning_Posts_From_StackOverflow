@@ -72,18 +72,18 @@ parent_break = False
 for idx in range(len_df):
     question_details = df.iloc[idx]
     if pd.isnull(question_details['AnsUserAboutMe']):
-        df.ix[idx, 'Designation'] = 'Unknown'
+        df.loc[idx, 'Designation'] = 'Unknown'
         continue
     for parent_designation in _designations:
         for child_designation in _designation_map[parent_designation]:
             if child_designation in question_details['AnsUserAboutMe'].lower():
-                df.ix[idx, 'Designation'] = parent_designation
+                df.loc[idx, 'Designation'] = parent_designation
                 parent_break = True
                 break
         if parent_break:
             parent_break = False
             break
-        df.ix[idx, 'Designation'] = 'Unknown'
+        df.loc[idx, 'Designation'] = 'Unknown'
 
 ###############################################################################
         
@@ -114,8 +114,8 @@ for user_id in user_post_details.keys():
                     (user_post_details[user_id]['TotalDownVoteCount'] + 1) *
                     max_num_posts))
 for idx in range(len_df):
-    user_id = df.ix[idx, 'AnsUserId']
-    df.ix[idx, 'SmoothedWeightedUpVoteDownVoteRatio'] = (
+    user_id = df.loc[idx, 'AnsUserId']
+    df.loc[idx, 'SmoothedWeightedUpVoteDownVoteRatio'] = (
             user_post_details[user_id]['SmoothedWeightedUpVoteDownVoteRatio'])
     
 ###############################################################################

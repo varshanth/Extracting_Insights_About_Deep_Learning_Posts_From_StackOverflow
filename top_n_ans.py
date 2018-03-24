@@ -1,6 +1,6 @@
 ###############################################################################
 
-# REQUIRED: StackOverFlow DataStackExchange Output of RQ1.1 Question-Answers
+# REQUIRED: Stack Exchange Data Explorer Output of RQ1.1 Question-Answers
 #           Query
 # OUTPUT: rq1.1top_<N>_answer_raw.csv:
 #            CSV Containing Question-Top N Answers according to answer score
