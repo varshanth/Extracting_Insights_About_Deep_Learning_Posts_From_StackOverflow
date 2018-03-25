@@ -105,15 +105,18 @@ for idx in range(len_ques_records):
     swudr_ranges = tag_to_ranges[tag]['SWUDR']
     for score_range in score_ranges:
         if is_val_in_range(score_range, score):
-            rq1_1_ques_df.loc[idx, 'ScoreRange'] = '[{0} - {1})'.format(
+            rq1_1_ques_df.loc[idx,
+                              'ScoreRange'] = '[{:.2f} - {:.2f})'.format(
                     score_range[0], score_range[1])
     for reputation_range in reputation_ranges:
         if is_val_in_range(reputation_range, reputation):
-            rq1_1_ques_df.loc[idx, 'ReputationRange'] = '[{0} - {1})'.format(
+            rq1_1_ques_df.loc[idx,
+                              'ReputationRange'] = '[{:.2f} - {:.2f})'.format(
                     reputation_range[0], reputation_range[1])
     for swudr_range in swudr_ranges:
         if is_val_in_range(swudr_range, swudr):
-            rq1_1_ques_df.loc[idx, 'SWUDRRange'] = '[{0} - {1})'.format(
+            rq1_1_ques_df.loc[idx,
+                              'SWUDRRange'] = '[{:.2f} - {:.2f})'.format(
                     swudr_range[0], swudr_range[1])
 
 cols = ['Id', 'TagName', 'Score', 'ScoreRange', 'Reputation',
@@ -165,15 +168,16 @@ for idx in range(len_ans_records):
     swudr_ranges = tag_to_ranges[tag]['SWUDR']
     for score_range in score_ranges:
         if is_val_in_range(score_range, score):
-            rq1_1_ans_df.loc[idx, 'ScoreRange'] = '[{0} - {1})'.format(
+            rq1_1_ans_df.loc[idx, 'ScoreRange'] = '[{:.2f} - {:.2f})'.format(
                     score_range[0], score_range[1])
     for reputation_range in reputation_ranges:
         if is_val_in_range(reputation_range, reputation):
-            rq1_1_ans_df.loc[idx, 'ReputationRange'] = '[{0} - {1})'.format(
+            rq1_1_ans_df.loc[idx,
+                             'ReputationRange'] = '[{:.2f} - {:.2f})'.format(
                     reputation_range[0], reputation_range[1])
     for swudr_range in swudr_ranges:
         if is_val_in_range(swudr_range, swudr):
-            rq1_1_ans_df.loc[idx, 'SWUDRRange'] = '[{0} - {1})'.format(
+            rq1_1_ans_df.loc[idx, 'SWUDRRange'] = '[{:.2f} - {:.2f})'.format(
                     swudr_range[0], swudr_range[1])
 
 cols = ['AnsId', 'TagName', 'AnsScore', 'ScoreRange', 'AnsUserRep',
