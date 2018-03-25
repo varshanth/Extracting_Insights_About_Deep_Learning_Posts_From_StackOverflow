@@ -35,6 +35,13 @@ ans_group_by_tagname = rq1_1_ans_df.groupby('TagName')
 ###############################################################################
 
 def gen_3_ranges(min_val, max_val):
+    '''
+    Input 1: Lower value of interval (inclusive)
+    Input 2: Upper value of interval (exclusive)
+    Purpose: Return 3 intervals within the range of (max_val - min_val) if the
+             latter is non zero, else return the interval (min_val, max_val)
+    Output: Either 1 or 3 Interval Ranges
+    '''
     if min_val == max_val:
         return [(min_val, max_val)]
     diff = max_val - min_val
@@ -45,6 +52,11 @@ def gen_3_ranges(min_val, max_val):
     return ranges
 
 def is_val_in_range(interval, val):
+    '''
+    Input 1: Open interval containing [min_val, max_val)
+    Input 2: Value to check if it is in the specified interval
+    Output: True if the value is in the interval else False
+    '''
     min_val = interval[0]
     max_val = interval[1]
     return True if min_val <= val < max_val else False
