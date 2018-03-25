@@ -48,7 +48,7 @@ def is_val_in_range(interval, val):
     min_val = interval[0]
     max_val = interval[1]
     return True if min_val <= val < max_val else False
-'''
+
 #################### PREPARE RQ1.2 QUESTION OUTPUT ############################
 
 rq1_1_ques_df['ScoreRange'] = np.nan
@@ -104,11 +104,11 @@ for idx in range(len_ques_records):
             rq1_1_ques_df.loc[idx, 'SWUDRRange'] = '[{0} - {1})'.format(
                     swudr_range[0], swudr_range[1])
 
-cols = ['Id', 'TagName', 'Score', 'ScoreRange', 'Reputation', 'ReputationRange',
-        'SmoothedWeightedUpVoteDownVoteRatio', 'SWUDRRange']
+cols = ['Id', 'TagName', 'Score', 'ScoreRange', 'Reputation',
+        'ReputationRange', 'SmoothedWeightedUpVoteDownVoteRatio', 'SWUDRRange']
 question_rq1_2_df = rq1_1_ques_df.filter(cols, axis = 1)
 question_rq1_2_df.to_csv(rq_1_2_ques_output_path)
-'''
+
 ###################### PREPARE RQ1.2 ANSWER OUTPUT ############################
 
 rq1_1_ans_df['ScoreRange'] = np.nan
@@ -164,8 +164,8 @@ for idx in range(len_ans_records):
             rq1_1_ans_df.loc[idx, 'SWUDRRange'] = '[{0} - {1})'.format(
                     swudr_range[0], swudr_range[1])
 
-cols = ['AnsId', 'TagName', 'AnsScore', 'ScoreRange', 'AnsUserRep', 'ReputationRange',
-        'SmoothedWeightedUpVoteDownVoteRatio', 'SWUDRRange']
+cols = ['AnsId', 'TagName', 'AnsScore', 'ScoreRange', 'AnsUserRep',
+        'ReputationRange', 'SmoothedWeightedUpVoteDownVoteRatio', 'SWUDRRange']
 ans_rq1_2_df = rq1_1_ans_df.filter(cols, axis = 1)
 ans_rq1_2_df.to_csv(rq_1_2_ans_output_path)
 
