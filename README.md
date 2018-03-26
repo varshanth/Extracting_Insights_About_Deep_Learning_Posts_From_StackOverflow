@@ -1,6 +1,6 @@
 # Extracting Insights About Deep Learning Posts From StackOverflow
 
-Proposed Dataset: Stack Overflow from data stack exchange  
+Proposed Dataset: Stack Overflow from Stack Exchange Data Explorer
 
 ## RESEARCH QUESTION 1:
 How does the effect of previous experiences/reputation reflect on the quality of questions and answers?  
