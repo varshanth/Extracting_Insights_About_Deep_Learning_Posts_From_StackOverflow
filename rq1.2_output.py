@@ -66,11 +66,15 @@ def is_val_in_range(interval, val):
 rq1_1_ques_df['ScoreRange'] = np.nan
 rq1_1_ques_df['ReputationRange'] = np.nan
 rq1_1_ques_df['SWUDRRange'] = np.nan
+rq1_1_ques_df['TagStrength'] = np.nan
+total_ques = len(rq1_1_ques_df)
 
 tag_to_ranges = {}
+tag_strengths = {}
 counter = 1
 len_ques_tags = len(ques_group_by_tagname)
 print('Ques: Start retrieving ranges for {0} tags'.format(len_ques_tags))
+
 for tag, d_values in ques_group_by_tagname:
     print('Ques: Processing {0}/{1} tags'.format(counter, len_ques_tags))
     counter += 1
@@ -88,9 +92,12 @@ for tag, d_values in ques_group_by_tagname:
             'Reputation' : gen_3_ranges(min_reputation, max_reputation),
             'SWUDR' : gen_3_ranges(min_swudr, max_swudr)
             }
+    tag_strengths[tag] = len(tag_group_by_df) / total_ques
+
 print('Ques: Finished Retrieving Ranges. Start processing records')
 len_ques_records = len(rq1_1_ques_df)
 counter = 0
+
 for idx in range(len_ques_records):
     if counter % 100 == 0:
         print('Ques: Processing {0}/{1} QuesRecords'.format(counter,
@@ -118,8 +125,9 @@ for idx in range(len_ques_records):
             rq1_1_ques_df.loc[idx,
                               'SWUDRRange'] = '[{:.2f} - {:.2f})'.format(
                     swudr_range[0], swudr_range[1])
-
-cols = ['Id', 'TagName', 'Score', 'ScoreRange', 'Reputation',
+    rq1_1_ques_df.loc[idx, 'TagStrength'] = tag_strengths[tag]
+        
+cols = ['Id', 'TagName', 'TagStrength', 'Score', 'ScoreRange', 'Reputation',
         'ReputationRange', 'SmoothedWeightedUpVoteDownVoteRatio', 'SWUDRRange']
 question_rq1_2_df = rq1_1_ques_df.filter(cols, axis = 1)
 question_rq1_2_df.to_csv(rq_1_2_ques_output_path)
@@ -129,11 +137,15 @@ question_rq1_2_df.to_csv(rq_1_2_ques_output_path)
 rq1_1_ans_df['ScoreRange'] = np.nan
 rq1_1_ans_df['ReputationRange'] = np.nan
 rq1_1_ans_df['SWUDRRange'] = np.nan
+rq1_1_ans_df['TagStrength'] = np.nan
+total_ans = len(rq1_1_ans_df)
 
 tag_to_ranges = {}
+tag_strengths = {}
 counter = 1
 len_ans_tags = len(ans_group_by_tagname)
 print('Ans: Start retrieving ranges for {0} tags'.format(len_ans_tags))
+
 for tag, d_values in ans_group_by_tagname:
     print('Ans: Processing {0}/{1} tags'.format(counter, len_ans_tags))
     counter += 1
@@ -151,6 +163,8 @@ for tag, d_values in ans_group_by_tagname:
             'Reputation' : gen_3_ranges(min_reputation, max_reputation),
             'SWUDR' : gen_3_ranges(min_swudr, max_swudr)
             }
+    tag_strengths[tag] = len(tag_group_by_df) / total_ans
+    
 print('Ans: Finished Retrieving Ranges. Start processing records')
 len_ans_records = len(rq1_1_ans_df)
 counter = 0
@@ -179,9 +193,11 @@ for idx in range(len_ans_records):
         if is_val_in_range(swudr_range, swudr):
             rq1_1_ans_df.loc[idx, 'SWUDRRange'] = '[{:.2f} - {:.2f})'.format(
                     swudr_range[0], swudr_range[1])
+    rq1_1_ans_df.loc[idx, 'TagStrength'] = tag_strengths[tag]
 
-cols = ['AnsId', 'TagName', 'AnsScore', 'ScoreRange', 'AnsUserRep',
-        'ReputationRange', 'SmoothedWeightedUpVoteDownVoteRatio', 'SWUDRRange']
+cols = ['AnsId', 'TagName', 'TagStrength', 'AnsScore', 'ScoreRange',
+        'AnsUserRep', 'ReputationRange', 'SmoothedWeightedUpVoteDownVoteRatio',
+        'SWUDRRange']
 ans_rq1_2_df = rq1_1_ans_df.filter(cols, axis = 1)
 ans_rq1_2_df.to_csv(rq_1_2_ans_output_path)
 
